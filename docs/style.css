@@ -1,0 +1,636 @@
+/* 
+ * style.css
+ *
+ * Author: Chia-che Tsai
+ * Created: 09/12/2011
+ * Updated: 09/12/2011
+ */
+
+/* Common */
+:root {
+    --max-width: 960px;
+    --min-width: 480px;
+    --menu-height: 44px;
+    --minus-menu-height: -44px;
+}
+
+@media screen and (max-width: 960px) {
+    :root {
+        --max-width: 100% !important;
+    }
+}
+
+body {
+    margin: 0;
+    background-color: #fff;
+    text-align: center;
+    font-family: sans-serif;
+    font-size: 16px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a.url {
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+div {
+    display: block;
+}
+
+.server-title {
+    display: block;
+    clear: both;
+    margin: 0 auto;
+    padding: 1em 0.5em 1em 0.5em;
+    width: var(--max-width);
+    min-wdith: var(--min-width);
+    text-align: left;
+    font-weight: 800;
+    font-size: 200%;
+}
+
+.menuwrap {
+    display: block;
+    width: 100% !important;
+    height: var(--menu-height) !important;
+    background-color: #990000;
+    border: 0px;
+    margin: auto;
+    padding: 0px;
+}
+
+.menu {
+    display: block;
+    clear: both;
+    margin: 0 auto;
+    width: var(--max-width);
+    min-width: var(--min-width);
+    height: auto;
+}
+
+.menu * {
+    margin: 0px;
+    padding: 0px;
+    border: 0px;
+}
+
+.menu ul {
+    display: block;
+    list-style-type: none;
+    list-style-image: none;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.menu .menu-button {
+    display: block;
+    float: left;
+    padding: 0;
+    width: 0;
+    visibility: hidden;
+    height: var(--menu-height);
+}
+
+.menu .menu-sep {
+    background-color: #3d3d3d;
+    float: left;
+    width: 10px;
+    height: var(--menu-height);
+}
+
+@media screen and (max-width: 960px) {
+    :root {
+        --menu-width: 240px;
+    }
+
+    .menu .menu-button {
+        visibility: visible !important;
+    }
+
+    .menu ul {
+        list-style-type: none;
+        z-index: 1000;
+        display: block;
+        float: left;
+        margin-top: var(--menu-height);
+        left: 0;
+        width: var(--menu-width);
+        max-height: 0;
+        overflow: hidden;
+        -webkit-transition: all 0;
+        -moz-transition: all 0;
+        transition: all 0;
+    }
+
+    .menu.show-dropdown ul {
+        display: block;
+        visibility: visible;
+        max-height: 800px;
+    }
+
+    .menu.show-dropdown ul li ul {
+        visibility: hidden;
+    }
+
+    .menu.show-dropdown ul li:hover ul {
+        visibility: visible;
+    }
+
+    .menu ul li {
+        float: none;
+        z-index: 10000;
+        width: 100% !important;
+        box-sizing: border-box;
+    }
+
+    .menu ul li ul {
+        margin-top: var(--minus-menu-height);
+        left: var(--menu-width);
+    }
+
+    .menu .menu-sep {
+        width: 100% !important;
+        height: 10px !important;
+    }
+}
+
+.menu ul img {
+    vertical-align: middle;
+    margin-top: -0.5em;
+    height: 2em;
+}
+
+.menu ul a {
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    color: #FFF;
+    font-weight: 500;
+    font-size: 14px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.menu ul li {
+    background-color: #990000;
+    float: left;
+    border-left: 1px solid #800;
+    width: auto;
+}
+
+.menu ul li a {
+    padding: 12px 15px 12px 12px;
+    min-width: 30px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: var(--menu-height);
+    position: relative;
+    z-index: 1000;
+}
+
+.menu ul li:hover {
+    background-color: #aa0000;
+}
+
+.menu ul li.nosub, .menu ul li.nosub:hover {
+    background-color: #3d3d3d;
+}
+
+.menu ul li ul {
+    list-style-type: none;
+    z-index: 1000;
+    position: absolute;
+    opacity: 0.975;
+    display: block;
+    max-height: 0;
+    overflow: hidden;
+    -webkit-transition: all 0;
+    -moz-transition: all 0;
+    transition: all 0;
+}
+
+.menu ul li:hover ul {
+    display: block;
+    visibility: visible;
+    max-height: 800px;
+}
+
+.menu ul li ul a {
+    margin: 0px;
+    border: 0px;
+    background-color: #3d3d3d;
+    width: auto;
+    padding: 12px 15px;
+    text-transform: capitalize;
+    text-align: left;
+}
+
+.menu ul li ul a:hover {
+    background-color: #aa0000;
+}
+
+.menu ul li ul li {
+    float: none;
+    z-index: 10000;
+    border: 0 none;
+    background: #333;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid #282828;
+    border-left: 1px solid #282828;
+    border-right: 1px solid #282828 !important;
+}
+
+.main {
+    display: block;
+    clear: both;
+    width: var(--max-width);
+    min-width: var(--min-width);
+    margin: 0 auto;
+    text-align: left;
+    padding: 0;
+    background-color: #ffffff;
+    font-size: 100%;
+    overflow: hidden;
+}
+
+.wrapper {
+    display: block;
+    clear: both;
+    width: 100%;
+    text-align: left;
+    line-height: 175%;
+    padding: 0.6em;
+}
+
+.wrapper .block-title {
+    margin: 0 auto;
+    padding: 1.5em 1em 0 1em;
+    line-height: 200%;
+    font-weight: 800;
+    font-size: 150%;
+    color: #000;
+}
+
+.wrapper p {
+    margin: 1.5em 1.5em 0.5em 1.5em;
+}
+
+.wrapper div.code {
+    margin: 1.5em 3.5em 0.5em 3.5em;
+    padding: 0.5em;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    font-weight: 200;
+    font-size: 75%;
+    font-family: "Courier New", Courier, monospace;
+    line-height: 175%;
+    white-space: pre;
+}
+
+.wrapper span.code {
+    padding: 0.5em;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    font-size: 75%;
+    font-family: "Courier New", Courier, monospace;
+}
+
+.blank {
+    float: center;
+    clear: both;
+    width: 100%;
+}
+
+/* header.main.php */
+
+.page-title {
+    font-weight: 200;
+    font-size: 150%;
+    font-family: Garamond, Georgia;
+    line-height: 200%;
+}
+
+.page-title b {
+    font-weight: 500;
+}
+
+/* index.php */
+
+.authors .photo {
+    float: left;
+    padding: 0.2em 1em 0.2em 4em;
+    width: 25%;
+    max-width: 120px;
+    height:120px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.authors .photo img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.authors .name {
+    float: left;
+    clear: none;
+    padding: 0.2em 1em 0.2em 0.2em;
+    width: 50%;
+    height:120px;
+    vertical-align: middle;
+    font-size: 110%;
+    font-weight: 800;
+}
+
+.authors .name small {
+    font-size: 80%;
+    font-weight: 400;
+    color: #666;
+}
+
+.news .date {
+    float: left;
+    padding: 0.2em 1em 0.2em 4em;
+    width: 25%;
+    max-width: 120px;
+    font-weight: 600;
+}
+
+.news .headline {
+    float: left;
+    padding: 0.2em 1em 0.2em 0.2em;
+    width: 50%;
+}
+
+/* study.inc.php */
+
+.chart-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 50%;
+    float: left;
+    height: 0;
+}
+
+.chart-wrapper #chart {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+}
+
+.chart-wrapper #chart .tooltip {
+    padding: 1em 0.5em 0.3em 0.5em;
+    text-align: center;
+    line-height: 200%;
+}
+
+.chart-wrapper #chart .tooltip .api-type {
+    font-size: 130%;
+}
+
+.chart-wrapper #chart .tooltip .api-name {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 200%;
+    font-weight: 600;
+}
+
+.chart-wrapper #chart .tooltip .api-id {
+    font-size: 100%;
+}
+
+.chart-wrapper #chart .tooltip .api-rank {
+    font-size: 130%;
+    font-weight: 400;
+}
+
+.chart-wrapper #chart .tooltip .api-metric {
+    font-size: 120%;
+    font-weight: 400;
+}
+
+.chart-wrapper #chart .tooltip .api-metric-order sup {
+    font-size: 120%;
+    font-weight: 400;
+}
+
+.chart-dashboard .control {
+    display: block;
+    float: left;
+    white-space: nowrap;
+    margin: 0.2em;
+    font-size: 90%;
+    line-height: 125%;
+    height: auto;
+    vertical-align: middle;
+    padding: 0.4em;
+}
+
+.chart-dashboard .dropdown-button {
+    border: 1px solid #339;
+    cursor: pointer;
+    font-size: 80%;
+    padding: 0.3em 0.5em;
+}
+
+.chart-dashboard .dropdown-button:hover, .chart-dashboard .dropdown-button:focus {
+    background-color: #339;
+    color: #fff;
+}
+
+.chart-dashboard .dropdown {
+    position: relative;
+    display: inline-block;
+    font-size: 90%;
+}
+
+.chart-dashboard .dropdown-menu {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 99;
+}
+
+.chart-dashboard .dropdown-menu a {
+    color: black;
+    padding: 0.5em 0.8em;
+    text-decoration: none;
+    display: block;
+}
+
+.chart-dashboard .dropdown-menu a:hover { background-color: #f1f1f1 }
+.chart-dashboard .show { display: block; }
+
+.chart-dashboard .input-box {
+    border: 1px solid #339;
+    font-size: 80%;
+    padding: 0.3em 0.5em;
+}
+
+/* linux/eval/os.php */
+
+.api-list-submit {
+    font-size: 110%;
+}
+
+.api-list-submit .input {
+    float: left;
+    clear: left;
+    margin: 0.3em 0.5em 0.3em 0.5em;
+}
+
+.api-list-submit .captcha {
+    float: left;
+}
+
+.api-list-submit input[type=text] {
+    font-size: 125%;
+    width: 15em;
+    padding: 0.2em;
+}
+
+.api-list-submit .text-label {
+    color: #ccc;
+    font-weight: 600;
+}
+
+.api-list-submit button {
+    background-color: #fff;
+    border: 2px solid #336699;
+    font-size: 125%;
+    font-weight: 600;
+    padding: 0.2em;
+}
+
+.api-list-submit button:hover {
+    background-color: #aaa;
+    color: #fff;
+}
+
+.api-list-submit .rc-anchor {
+    float: left;
+}
+
+.api-list {
+    margin: 0 1em 1em 0;
+    padding: 0.5em 1em 0.5em 1em;
+    float: left;
+    width: 45%;
+    max-width: var(--min-width);
+    min-width: 360px;
+    border: 1px solid #999;
+}
+
+.api-list .api-group {
+    padding: 0;
+    margin: 0;
+}
+
+.api-list .api-group .api-group {
+    margin-left: 3em;
+}
+
+.api-list .api-group-title {
+    padding: 0.3em;
+    margin: 0;
+    border: 1px solid #999;
+    background-color: #b3ccff;
+}
+
+.api-list .collapse-sign {
+    font-size: 150%;
+    color: #666;
+    margin-right: 0.5em;
+}
+
+.api-list .api-group-list-collapsed {
+    display: none !important;
+}
+
+.api-list .api-item {
+    padding: 0.3em 1em 0.3em 1em;
+    margin: 0;
+    border: 1px solid #999;
+}
+
+.api-list .api-item:hover {
+    background-color: #eee;
+}
+
+.api-list input[type="checkbox"] {
+    margin-right: 1em;
+}
+
+.api-list .api-item .api-name {
+    font-family: "Courier New", Courier, monospace;
+    font-size: 110%;
+    font-weight: 400;
+}
+
+.api-list .api-item .api-code {
+    display: block;
+    float: right;
+    font-size: 80%;
+    font-weight: 200;
+}
+
+.api-list-input {
+    float: left;
+    width: 45%;
+    max-width: var(--min-width);
+    min-width: 360px;
+    border: 1px solid #999;
+    padding: 0.5em 1em 0.5em 1em;
+}
+
+.api-list-input .explanation {
+    margin: 0.5em 2em 0.5em 2em;
+    font-size: 80%;
+    font-weight: 200;
+    line-height: 150%;
+    color: #333;
+}
+
+.api-list-input #api-list-text {
+    width: 100%;
+    min-height: 30em;
+    resize: vertical;
+    margin: 0.2em;
+}
+
+/* linux/query.php */
+
+.query .submit {
+    float: right;
+    margin-right: 3em;
+}
+
+.query .submit button {
+    background-color: #fff;
+    border: 1px solid #336699;
+    font-size: 80%;
+    font-weight: 400;
+    padding: 0.3em 0.6em 0.3em 0.6em;
+}
+
+.query button:hover {
+    background-color: #aaa;
+    color: #fff;
+}
+
+.query .args {
+    margin: 1.5em 1.5em 0.5em 1.5em;
+}
+
+.query .args td {
+    padding: 0.3em 0.6em 0.3em 0.6em;
+    font-size: 80%;
+}

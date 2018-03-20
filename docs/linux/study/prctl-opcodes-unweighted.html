@@ -1,0 +1,193 @@
+
+<html>
+
+<head>
+    <title>
+        Linux > Study (on Application Developers) > Opcodes for prctl System Call |         API Compatibility Database (Beta)    </title>
+
+    <link rel="StyleSheet" href="../../style.css" type="text/css"/>
+    <link rel="icon" type="image/ico" href="../../../images/oscar-favicon.ico" />
+    <link rel="Shortcut Icon" href="../../../images/oscar-favicon.ico" />
+
+    <meta name="viewport" content="width=device-width" />
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':["corechart","controls"]});
+      google.charts.setOnLoadCallback(drawDashboard);
+      window.onresize = drawDashboard;
+
+      function drawDashboard() {
+          var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard'));
+
+          var chart_types = [{description:"Line Chart - The N-most adopted prctl opcodes",class:"LineChart",columns:[{type:"number",label:"The N-most adopted prctl opcodes"},{type:"number",label:"unweighted API importance"},{type:"string",label:"prctl opcodes",role:"annotation"},{type:"string",label:"description",role:"tooltip",p:{html:true}}],rangedColumn:"The N-most adopted prctl opcodes",rangedColumnFormat:"#,###",options:{displayAnnotations:true,legend:"none",hAxis:{title:"The N-most adopted prctl opcodes",titleTextStyle:{fontSize:"24",bold:true},format:"###,###"},vAxis:{title:"unweighted API importance",titleTextStyle:{fontSize:"24",bold:true},format:"###,###%",minValue:0,maxValue:1},tooltip:{isHtml:true}}},{description:"Bar Chart - The N-most adopted prctl opcodes",class:"ColumnChart",columns:[{type:"number",label:"The N-most adopted prctl opcodes"},{type:"number",label:"unweighted API importance"},{type:"string",label:"prctl opcodes",role:"annotation"},{type:"string",label:"description",role:"tooltip",p:{html:true}}],rangedColumn:"The N-most adopted prctl opcodes",rangedColumnFormat:"#,###",options:{displayAnnotations:true,legend:"none",hAxis:{title:"The N-most adopted prctl opcodes",titleTextStyle:{fontSize:"24",bold:true},format:"###,###"},vAxis:{title:"unweighted API importance",titleTextStyle:{fontSize:"24",bold:true},format:"###,###%",minValue:0,maxValue:1},bar:{gap:0}}},{description:"Histogram - Distribution of unweighted API importance",class:"Histogram",columns:[{type:"string",label:"prctl opcodes"},{type:"number",label:"unweighted API importance"}],filteredColumns:[3,1],rangedColumn:"unweighted API importance",rangedColumnFormat:"#,###%",options:{displayAnnotations:true,legend:"none",hAxis:{title:"unweighted API importance",titleTextStyle:{fontSize:"24",bold:true},format:"###,###%",ticks:[0,0.25,0.5,0.75,1]},vAxis:{title:"Number of prctl opcodess",titleTextStyle:{fontSize:"24",bold:true}},bar:{gap:0},histogram:{bucketSize:0.05,minValue:0,maxValue:1},reverseCategories:true}}];
+          var chart_description = document.getElementById('chart_type_button').innerHTML.replace(/^\s+|\s+$/g, '');
+          var i;
+          var selected;
+
+          for (i = 0; i < chart_types.length; i++) {
+              var type = chart_types[i];
+              if (type['description'] == chart_description) {
+                  selected = type;
+              }
+          }
+
+          var rankRangeSlider = new google.visualization.ControlWrapper({
+              controlType: 'NumberRangeFilter',
+              containerId: 'filter',
+              options: {
+                  filterColumnLabel: selected['rangedColumn'],
+                  ui: {
+                      step: 0.1,
+                      label: selected['rangedColumn'] + ':',
+                      format: { pattern: selected['rangedColumnFormat'] }
+                  }
+              }
+          });
+
+          var chart = new google.visualization.ChartWrapper({
+              chartType: selected['class'],
+              containerId: 'chart',
+              options: selected['options']
+          });
+
+          var savechart = document.getElementById('savechart');
+          google.visualization.events.addListener(chart, 'ready', function () {
+              savechart.innerHTML = '<a href="http://oscar.cs.stonybrook.edu/api-compat-study/linux/study/'&#32;+&#32;chart.getChart().getImageURI()&#32;+&#32;'">Download chart (PNG)</a>';
+          });
+
+          var search = document.getElementById("search-text").value.split(',');
+          var data = new google.visualization.DataTable();
+          for (i = 0; i < selected['columns'].length; i++) {
+              data.addColumn(selected['columns'][i]);
+          }
+          var dataRows = [[1,0.113456,"PR_SET_NAME(0xf)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_NAME<\/span> <span class=\"api-id\">(0xf)<\/span><br \/> ( rank: <span class=\"api-rank\">1<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">11.35%<\/span> <\/div>"],[2,0.068677,"PR_GET_DUMPABLE(0x3)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_DUMPABLE<\/span> <span class=\"api-id\">(0x3)<\/span><br \/> ( rank: <span class=\"api-rank\">2<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">6.87%<\/span> <\/div>"],[3,0.032831,"PR_SET_PTRACER(0x59616d61)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_PTRACER<\/span> <span class=\"api-id\">(0x59616d61)<\/span><br \/> ( rank: <span class=\"api-rank\">3<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">3.28%<\/span> <\/div>"],[4,0.014405,"PR_GET_NAME(0x10)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_NAME<\/span> <span class=\"api-id\">(0x10)<\/span><br \/> ( rank: <span class=\"api-rank\">4<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">1.44%<\/span> <\/div>"],[5,0.008152,"PR_SET_KEEPCAPS(0x8)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_KEEPCAPS<\/span> <span class=\"api-id\">(0x8)<\/span><br \/> ( rank: <span class=\"api-rank\">5<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.82%<\/span> <\/div>"],[6,0.007929,"PR_SET_DUMPABLE(0x4)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_DUMPABLE<\/span> <span class=\"api-id\">(0x4)<\/span><br \/> ( rank: <span class=\"api-rank\">6<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.79%<\/span> <\/div>"],[7,0.00402,"PR_SET_PDEATHSIG(0x1)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_PDEATHSIG<\/span> <span class=\"api-id\">(0x1)<\/span><br \/> ( rank: <span class=\"api-rank\">7<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.40%<\/span> <\/div>"],[8,0.002903,"PR_SET_NO_NEW_PRIVS(0x26)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_NO_NEW_PRIVS<\/span> <span class=\"api-id\">(0x26)<\/span><br \/> ( rank: <span class=\"api-rank\">8<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.29%<\/span> <\/div>"],[9,0.002457,"PR_CAPBSET_DROP(0x18)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_CAPBSET_DROP<\/span> <span class=\"api-id\">(0x18)<\/span><br \/> ( rank: <span class=\"api-rank\">9<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.25%<\/span> <\/div>"],[10,0.00201,"PR_SET_SECCOMP(0x16)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_SECCOMP<\/span> <span class=\"api-id\">(0x16)<\/span><br \/> ( rank: <span class=\"api-rank\">10<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.20%<\/span> <\/div>"],[11,0.001675,"PR_GET_KEEPCAPS(0x7)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_KEEPCAPS<\/span> <span class=\"api-id\">(0x7)<\/span><br \/> ( rank: <span class=\"api-rank\">11<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.17%<\/span> <\/div>"],[12,0.001005,"PR_CAPBSET_READ(0x17)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_CAPBSET_READ<\/span> <span class=\"api-id\">(0x17)<\/span><br \/> ( rank: <span class=\"api-rank\">12<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.10%<\/span> <\/div>"],[13,0.000782,"PR_MCE_KILL(0x21)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_MCE_KILL<\/span> <span class=\"api-id\">(0x21)<\/span><br \/> ( rank: <span class=\"api-rank\">13<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.08%<\/span> <\/div>"],[14,0.000782,"PR_GET_TIMERSLACK(0x1e)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_TIMERSLACK<\/span> <span class=\"api-id\">(0x1e)<\/span><br \/> ( rank: <span class=\"api-rank\">14<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.08%<\/span> <\/div>"],[15,0.000558,"PR_SET_SECUREBITS(0x1c)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_SECUREBITS<\/span> <span class=\"api-id\">(0x1c)<\/span><br \/> ( rank: <span class=\"api-rank\">15<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.06%<\/span> <\/div>"],[16,0.000558,"PR_SET_TIMERSLACK(0x1d)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_TIMERSLACK<\/span> <span class=\"api-id\">(0x1d)<\/span><br \/> ( rank: <span class=\"api-rank\">16<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.06%<\/span> <\/div>"],[17,0.000447,"PR_SET_MM(0x23)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_MM<\/span> <span class=\"api-id\">(0x23)<\/span><br \/> ( rank: <span class=\"api-rank\">17<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.04%<\/span> <\/div>"],[18,0.000447,"PR_GET_SECUREBITS(0x1b)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_SECUREBITS<\/span> <span class=\"api-id\">(0x1b)<\/span><br \/> ( rank: <span class=\"api-rank\">18<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.04%<\/span> <\/div>"],[19,0.000335,"PR_GET_PDEATHSIG(0x2)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_PDEATHSIG<\/span> <span class=\"api-id\">(0x2)<\/span><br \/> ( rank: <span class=\"api-rank\">19<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.03%<\/span> <\/div>"],[20,0.000335,"PR_SET_CHILD_SUBREAPER(0x24)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_CHILD_SUBREAPER<\/span> <span class=\"api-id\">(0x24)<\/span><br \/> ( rank: <span class=\"api-rank\">20<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.03%<\/span> <\/div>"],[21,0.000223,"PR_GET_SECCOMP(0x15)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_SECCOMP<\/span> <span class=\"api-id\">(0x15)<\/span><br \/> ( rank: <span class=\"api-rank\">21<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.02%<\/span> <\/div>"],[22,0.000223,"PR_MCE_KILL_GET(0x22)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_MCE_KILL_GET<\/span> <span class=\"api-id\">(0x22)<\/span><br \/> ( rank: <span class=\"api-rank\">22<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.02%<\/span> <\/div>"],[23,0.000223,"PR_GET_FPEMU(0x9)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_FPEMU<\/span> <span class=\"api-id\">(0x9)<\/span><br \/> ( rank: <span class=\"api-rank\">23<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.02%<\/span> <\/div>"],[24,0.000112,"PR_SET_PTRACER_ANY(0xffffffff)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_PTRACER_ANY<\/span> <span class=\"api-id\">(0xffffffff)<\/span><br \/> ( rank: <span class=\"api-rank\">24<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.01%<\/span> <\/div>"],[25,0.000112,"PR_GET_UNALIGN(0x5)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_UNALIGN<\/span> <span class=\"api-id\">(0x5)<\/span><br \/> ( rank: <span class=\"api-rank\">25<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.01%<\/span> <\/div>"],[26,0.000112,"PR_SET_UNALIGN(0x6)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_UNALIGN<\/span> <span class=\"api-id\">(0x6)<\/span><br \/> ( rank: <span class=\"api-rank\">26<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.01%<\/span> <\/div>"],[27,0.000112,"PR_SET_FPEMU(0xa)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_FPEMU<\/span> <span class=\"api-id\">(0xa)<\/span><br \/> ( rank: <span class=\"api-rank\">27<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.01%<\/span> <\/div>"],[28,0.000112,"PR_GET_FPEXC(0xb)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_FPEXC<\/span> <span class=\"api-id\">(0xb)<\/span><br \/> ( rank: <span class=\"api-rank\">28<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.01%<\/span> <\/div>"],[29,0.000112,"PR_GET_TIMING(0xd)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_TIMING<\/span> <span class=\"api-id\">(0xd)<\/span><br \/> ( rank: <span class=\"api-rank\">29<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.01%<\/span> <\/div>"],[30,0.000112,"PR_GET_ENDIAN(0x13)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_ENDIAN<\/span> <span class=\"api-id\">(0x13)<\/span><br \/> ( rank: <span class=\"api-rank\">30<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.01%<\/span> <\/div>"],[31,0.000112,"PR_GET_TSC(0x19)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_TSC<\/span> <span class=\"api-id\">(0x19)<\/span><br \/> ( rank: <span class=\"api-rank\">31<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.01%<\/span> <\/div>"],[32,0.000112,"PR_SET_TSC(0x1a)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_TSC<\/span> <span class=\"api-id\">(0x1a)<\/span><br \/> ( rank: <span class=\"api-rank\">32<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.01%<\/span> <\/div>"],[33,0.000112,"PR_SET_CHILD_SUBREAPER(0x25)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_CHILD_SUBREAPER<\/span> <span class=\"api-id\">(0x25)<\/span><br \/> ( rank: <span class=\"api-rank\">33<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.01%<\/span> <\/div>"],[34,0.000112,"PR_GET_NO_NEW_PRIVS(0x27)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_NO_NEW_PRIVS<\/span> <span class=\"api-id\">(0x27)<\/span><br \/> ( rank: <span class=\"api-rank\">34<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.01%<\/span> <\/div>"],[35,0.000112,"PR_GET_TID_ADDRESS(0x28)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_TID_ADDRESS<\/span> <span class=\"api-id\">(0x28)<\/span><br \/> ( rank: <span class=\"api-rank\">35<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.01%<\/span> <\/div>"],[36,0,"PR_SET_ENDIAN(0x14)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_ENDIAN<\/span> <span class=\"api-id\">(0x14)<\/span><br \/> ( rank: <span class=\"api-rank\">36<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.00%<\/span> <\/div>"],[37,0,"PR_SET_TIMING(0xe)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_TIMING<\/span> <span class=\"api-id\">(0xe)<\/span><br \/> ( rank: <span class=\"api-rank\">37<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.00%<\/span> <\/div>"],[38,0,"PR_SET_FPEXC(0xc)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_FPEXC<\/span> <span class=\"api-id\">(0xc)<\/span><br \/> ( rank: <span class=\"api-rank\">38<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.00%<\/span> <\/div>"],[39,0,"PR_SET_THP_DISABLE(0x29)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_SET_THP_DISABLE<\/span> <span class=\"api-id\">(0x29)<\/span><br \/> ( rank: <span class=\"api-rank\">39<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.00%<\/span> <\/div>"],[40,0,"PR_GET_THP_DISABLE(0x2a)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_GET_THP_DISABLE<\/span> <span class=\"api-id\">(0x2a)<\/span><br \/> ( rank: <span class=\"api-rank\">40<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.00%<\/span> <\/div>"],[41,0,"PR_MPX_ENABLE_MANAGEMENT(0x2b)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_MPX_ENABLE_MANAGEMENT<\/span> <span class=\"api-id\">(0x2b)<\/span><br \/> ( rank: <span class=\"api-rank\">41<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.00%<\/span> <\/div>"],[42,0,"PR_TASK_PERF_EVENTS_ENABLE(0x20)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_TASK_PERF_EVENTS_ENABLE<\/span> <span class=\"api-id\">(0x20)<\/span><br \/> ( rank: <span class=\"api-rank\">42<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.00%<\/span> <\/div>"],[43,0,"PR_TASK_PERF_EVENTS_DISABLE(0x1f)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_TASK_PERF_EVENTS_DISABLE<\/span> <span class=\"api-id\">(0x1f)<\/span><br \/> ( rank: <span class=\"api-rank\">43<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.00%<\/span> <\/div>"],[44,0,"PR_MPX_DISABLE_MANAGEMENT(0x2c)","<div class=\"tooltip\"><span class=\"api-type\">prctl opcodes:<\/span> <span class=\"api-name\">PR_MPX_DISABLE_MANAGEMENT<\/span> <span class=\"api-id\">(0x2c)<\/span><br \/> ( rank: <span class=\"api-rank\">44<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.00%<\/span> <\/div>"]];
+          dataRows.forEach(function(element, index, array) {
+              var i;
+
+              for (i = 0; i < search.length; i++) {
+                  if (search[i] && element[2].startsWith(search[i] + '('))
+                      break;
+              }
+              if (i == search.length) {
+                  element[2] = null;
+              }
+
+              if ('filteredColumns' in selected) {
+                  var newelement = new Array(selected['filteredColumns'].length);
+                  for (i = 0; i < selected['filteredColumns'].length; i++) {
+                      newelement[i] = element[selected['filteredColumns'][i]];
+                  }
+                  array[index] = newelement;
+              }
+          });
+          data.addRows(dataRows);
+
+          dashboard.bind(rankRangeSlider, chart);
+          dashboard.draw(data);
+      }
+
+      window.onclick = function(event) {
+          if (!event.target.matches('.dropdown-button')) {
+              var dropdowns = document.getElementsByClassName("dropdown-menu");
+              var i;
+              for (i = 0; i < dropdowns.length; i++) {
+                  var openDropdown = dropdowns[i];
+                  if (openDropdown.classList.contains('show')) {
+                      openDropdown.classList.remove('show');
+                  }
+              }
+          }
+      }
+
+      function toggleDropdown(id) {
+          document.getElementById(id).classList.toggle('show');
+      }
+
+      function selectDropdown(id, text) {
+          document.getElementById(id).innerHTML = text;
+          drawDashboard();
+      }
+
+      function keyDownInput(event) {
+          if (event.keyCode == 13) {
+              drawDashboard();
+          }
+      }
+</script>
+
+</head>
+
+<body>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26854735-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+        <div class="blank"></div>
+        <div class="server-title">API Compatibility Database (Beta)</div>
+        <div class="menuwrap"><div class="menu">
+        <div class="menu-button">
+            <script type="text/javascript">
+            function togglemenu() {
+                var menu = document.getElementsByClassName("menu");
+                if (menu) {
+                    menu[0].classList.toggle("show-dropdown");
+                }
+            }
+            </script>
+            <img onclick="togglemenu()" style="height: 100%" src="../../images/menu-button.png"></div>
+            <ul>
+<li><a href="../../index.html">Home</a></li><li><a>Methodology</a><ul><li><a href="../../method/concepts.html">Basic concepts</a></li><li><a href="../../method/api-importance.html">Metric: API importance</a></li><li><a href="../../method/weighted-completeness.html">Metric: weighted completeness</a></li><li><a href="../../method/unweighted-api-importance.html">Metric: unweighted API importance</a></li><li><a href="../../method/analysis.html">Application anlaysis</a></li><li><a href="../../method/limitations.html">Limitations</a></li></ul></li><li class="nosub"><a>Linux <img src="../../images/linux-logo.png"></a></li><li><a>Evaluation</a><ul><li><a href="../eval/os.html">OS / emulation layers</a></li><li><a href="../eval/libc.html">Libc variants</a></li></ul></li><li><a>Scope</a><ul><li><a href="../scope/package-popularity.html">Package popularity</a></li><li><a href="../scope/package-types.html">Package types</a></li><li><a href="../scope/executable-types.html">Executable types</a></li></ul></li><li><a>Study (on users)</a><ul><li><a href="syscalls.html">System calls</a></li><li><a href="fcntl-opcodes.html">Vectored system calls: fcntl</a></li><li><a href="ioctl-opcodes.html">Vectored system calls: ioctl</a></li><li><a href="prctl-opcodes.html">Vectored system calls: prctl</a></li><li><a href="pseudo-files.html">Pseudo-files and system files</a></li><li><a href="gnu-libc-functions.html">Library functions: GNU libc</a></li></ul></li><li><a>Study (on applications)</a><ul><li><a href="syscalls-unweighted.html">System calls</a></li><li><a href="fcntl-opcodes-unweighted.html">Vectored system calls: fcntl</a></li><li><a href="ioctl-opcodes-unweighted.html">Vectored system calls: ioctl</a></li><li><a href="prctl-opcodes-unweighted.html">Vectored system calls: prctl</a></li><li><a href="pseudo-files-unweighted.html">Pseudo-files and system files</a></li><li><a href="gnu-libc-functions-unweighted.html">Library functions: GNU libc</a></li></ul></li><li><a>Database</a><ul><li><a href="../query.html">Online query (beta)</a></li><li><a href="../download.html">Download raw database</a></li></ul></li><div class="menu-sep"></div><li><a>Framework</a><ul><li><a href="../../framework/api-analysis.html">GitHub</a></li></ul></li>            </ul>
+        </div></div>
+        <div class="main">
+                            <div class="wrapper top">
+                    <h1 class="page-title">Linux > Study (on Application Developers) > Opcodes for prctl System Call</h1>
+                </div>
+            
+<div class="wrapper">
+    <div class="chart-wrapper"><div id="chart"></div></div>
+    <div class="blank"></div>
+</div>
+
+<div class="wrapper">
+    <div class="chart-dashboard" id="dashboard">
+        <div class="control dropdown">
+            Chart type:
+            <button onclick="toggleDropdown('chart_type')" id="chart_type_button" class="dropdown-button">
+                Line Chart - The N-most adopted prctl opcodes            </button>
+            <div id="chart_type" class="dropdown-menu">
+                                    <a href="prctl-opcodes-unweighted.html#" onclick="selectDropdown('chart_type_button', 'Line Chart - The N-most adopted prctl opcodes')">Line Chart - The N-most adopted prctl opcodes</a>
+                                    <a href="prctl-opcodes-unweighted.html#" onclick="selectDropdown('chart_type_button', 'Bar Chart - The N-most adopted prctl opcodes')">Bar Chart - The N-most adopted prctl opcodes</a>
+                                    <a href="prctl-opcodes-unweighted.html#" onclick="selectDropdown('chart_type_button', 'Histogram - Distribution of unweighted API importance')">Histogram - Distribution of unweighted API importance</a>
+                            </div>
+        </div>
+
+        <div class="control" id="filter"></div>
+
+        <div class="control" id="search">
+        Search prctl opcodess (use comma to separate):
+             <input onkeydown="keyDownInput(event)" type="text" id="search-text" class="input-box">
+        </div>
+
+        <div class="blank">
+        <div class="control" id="savechart"></div>
+        <div class="control" id="savecsv"><a href="../../data/linux-prctl-opcodes-unweighted-api-importance.csv">Download data (CSV)</a></div>
+    </div>
+
+    <div class="blank"></div>
+</div>
+
+        </div>
+    </div>
+</body>
+</html>
+

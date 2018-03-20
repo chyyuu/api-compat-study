@@ -1,0 +1,197 @@
+
+<html>
+
+<head>
+    <title>
+        Methodology > Basic Concepts |         API Compatibility Database (Beta)    </title>
+
+    <link rel="StyleSheet" href="../style.css" type="text/css"/>
+    <link rel="icon" type="image/ico" href="../../images/oscar-favicon.ico" />
+    <link rel="Shortcut Icon" href="../../images/oscar-favicon.ico" />
+
+    <meta name="viewport" content="width=device-width" />
+</head>
+
+<body>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26854735-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+        <div class="blank"></div>
+        <div class="server-title">API Compatibility Database (Beta)</div>
+        <div class="menuwrap"><div class="menu">
+        <div class="menu-button">
+            <script type="text/javascript">
+            function togglemenu() {
+                var menu = document.getElementsByClassName("menu");
+                if (menu) {
+                    menu[0].classList.toggle("show-dropdown");
+                }
+            }
+            </script>
+            <img onclick="togglemenu()" style="height: 100%" src="../images/menu-button.png"></div>
+            <ul>
+<li><a href="../index.html">Home</a></li><li><a>Methodology</a><ul><li><a href="concepts.html">Basic concepts</a></li><li><a href="api-importance.html">Metric: API importance</a></li><li><a href="weighted-completeness.html">Metric: weighted completeness</a></li><li><a href="unweighted-api-importance.html">Metric: unweighted API importance</a></li><li><a href="analysis.html">Application anlaysis</a></li><li><a href="limitations.html">Limitations</a></li></ul></li><li class="nosub"><a>Linux <img src="../images/linux-logo.png"></a></li><li><a>Evaluation</a><ul><li><a href="../linux/eval/os.html">OS / emulation layers</a></li><li><a href="../linux/eval/libc.html">Libc variants</a></li></ul></li><li><a>Scope</a><ul><li><a href="../linux/scope/package-popularity.html">Package popularity</a></li><li><a href="../linux/scope/package-types.html">Package types</a></li><li><a href="../linux/scope/executable-types.html">Executable types</a></li></ul></li><li><a>Study (on users)</a><ul><li><a href="../linux/study/syscalls.html">System calls</a></li><li><a href="../linux/study/fcntl-opcodes.html">Vectored system calls: fcntl</a></li><li><a href="../linux/study/ioctl-opcodes.html">Vectored system calls: ioctl</a></li><li><a href="../linux/study/prctl-opcodes.html">Vectored system calls: prctl</a></li><li><a href="../linux/study/pseudo-files.html">Pseudo-files and system files</a></li><li><a href="../linux/study/gnu-libc-functions.html">Library functions: GNU libc</a></li></ul></li><li><a>Study (on applications)</a><ul><li><a href="../linux/study/syscalls-unweighted.html">System calls</a></li><li><a href="../linux/study/fcntl-opcodes-unweighted.html">Vectored system calls: fcntl</a></li><li><a href="../linux/study/ioctl-opcodes-unweighted.html">Vectored system calls: ioctl</a></li><li><a href="../linux/study/prctl-opcodes-unweighted.html">Vectored system calls: prctl</a></li><li><a href="../linux/study/pseudo-files-unweighted.html">Pseudo-files and system files</a></li><li><a href="../linux/study/gnu-libc-functions-unweighted.html">Library functions: GNU libc</a></li></ul></li><li><a>Database</a><ul><li><a href="../linux/query.html">Online query (beta)</a></li><li><a href="../linux/download.html">Download raw database</a></li></ul></li><div class="menu-sep"></div><li><a>Framework</a><ul><li><a href="../framework/api-analysis.html">GitHub</a></li></ul></li>            </ul>
+        </div></div>
+        <div class="main">
+                            <div class="wrapper top">
+                    <h1 class="page-title">Methodology > Basic Concepts</h1>
+                </div>
+            
+<div class="wrapper">
+<div class="block-title">The struggles about API usage and compatibility</div>
+
+<p>
+The design and support of <b>APIs (application programming interfaces)</b>
+is greatly important in the world of systems.
+Because APIs define the interaction between applications and operating systems,
+the support of APIs is essentailly a contract between the operating system
+developers and application developers.
+When application developers develope their software, they assume
+that all features and specifications presented by the API definitions
+must be supported by the operating systems.
+As a result, operating system developers must always take extra caution when
+dealing with API support.
+</p>
+
+<p>
+The ability of maintaining support for applications developered using the
+defined APIs is well known as <b>API compatibility</b>.
+In fact, because maintaining API compatibility is so important and difficult,
+operating system developers tends to keep old APIs around
+while the new ones replicates their functionality. In general,
+operating system developers are concerned about breaking existing applications,
+that they often avoid deprecating old APIs at all cost,
+or at least until going through a lengthy process of comfirmation.
+</p>
+
+<p>
+Even though API compatibility is no less important than other system properties
+(e.g., performance), the lack of proper measurement has always made API
+compatibility a property that is hard to evaluate or reason about.
+The definition of API compatibility
+in systems so far is closer to <b>bug-for-bug compatibility</b>: a system must
+implement every specifications of its precedents, including the
+unneeded or buggy ones. Such an evaluation model has left system developers
+no space to reduce API definitions or verify the progress of system building.
+</p>
+</div>
+
+<div class="wrapper">
+<div class="block-title">Who should care?</div>
+
+<p>
+The study of API usage and compatibility is mostly beneficial for
+<b>system developers</b>. When system developers are making decisions about
+API support, they must rely on instincts to decide what is important
+and what is not.
+As a result, there is no clear principle to follow while
+deciding whether and how an API can make a system more compatible.
+</p>
+
+<p>
+One type of system developers who will care about evaluating API usage
+and compatibility is <b>system builders</b>.
+System builders, during the process of gradually building up the API support,
+may struggle to express or prove their progress, or the <b>completeness</b>
+of the system they built. With bug compatibility, system builders
+can not make any claim until every API is supported in the system.
+Moreover, system builders need a principled way to prioritize the APIs that
+they have to implement, to maximize the support for user.
+</p>
+
+<p>
+Another role that will care about this study is <b>system API maintainers</b>,
+who may or may not be the same as system builders.
+They are the ones who take care of adding or deprecating APIs after the system
+is released.
+They need to know whether there is really no usage of an API so they can
+deprecate it safely. If for strong reason, they must restrict or change
+the semantic of an API, they can use this study as a source of assessing the
+demage after making the change.
+</p>
+
+<p>
+And finally, <b>system researchers</b> can find motivations to their works
+by observing the trends of API usage in the study.
+</p>
+</div>
+
+<div class="wrapper">
+<div class="block-title">Measuring API support properties</div>
+
+<p>
+To measure API usage and compatibility, we start with a simple
+evaluation model:
+counting the number of supported APIs or applications
+(as compatibility),
+or the number of applications depending on an API (as usage).
+</p>
+
+<p>
+The problem of such an evaluation model is the fact that
+<b>APIs are not equally popular, and neither are applications</b>.
+Each API can be either more often or less often used by applications
+than its peers, thus counting the number of supported APIs is mostly
+meaningless for comparison.
+Simply put, supporting a number of popular APIs can not be called
+equally compatible as supporting the same number of unpopular APIs.
+The same problem exists when we consider the number of supported
+applications. Each application also has its popularity among users,
+so supporting a number of popular applications can not be called
+eqaulally compatible as supporting the same number of applications.
+For more information, see
+<a href="../linux/scope/package-popularity.html">
+Linux > package popularity</a> and
+<a href="../linux/study/syscalls-unweighted.html">
+Linux > study (on application developers) > system calls</a>.
+</p>
+</div>
+
+<div class="wrapper">
+<div class="block-title">Consider both application developers and users</div>
+
+<p>
+Theoretically, the usage of APIs is dominated by two factors:
+the choice of APIs made by the application developers
+(including the library developers)
+and the choice of applications made by the users.
+These two types of data have to be collected in different ways.
+The API usage in application developers has to be collected from
+<b>application analysis</b>, in a large scale.
+The application popularity has to be collected from <b>user study</b>
+in the real world.
+</p>
+
+<p>
+Our evaluation model can be generalizable to different operating systems,
+if both application analysis and user study is feasible
+on the target platform.
+In this study, we target on Linux, paticularly on <b>Ubuntu/Debian</b>,
+because both application
+analysis and user study is relatively straightforward on the platform.
+First, Ubuntu/Debian is the most widely used Linux distribution.
+A large amount of applications on Ubuntu are binaries in the well-defined ELF
+format, so static analysis can reasonably detect the usage of APIs.
+Ubuntu/Debian's package manager (APT) helps automating large-scale
+application analysis. Finally, but as an important factor,
+Ubuntu/Debian provides <b>popularity contest</b>,
+a data set of installation statistics collected from majority of
+Ubuntu/Debian users.
+</p>
+</div>
+
+        </div>
+    </div>
+</body>
+</html>
+

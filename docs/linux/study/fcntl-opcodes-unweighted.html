@@ -1,0 +1,193 @@
+
+<html>
+
+<head>
+    <title>
+        Linux > Study (on Application Developers) > Opcodes for fcntl System Call |         API Compatibility Database (Beta)    </title>
+
+    <link rel="StyleSheet" href="../../style.css" type="text/css"/>
+    <link rel="icon" type="image/ico" href="../../../images/oscar-favicon.ico" />
+    <link rel="Shortcut Icon" href="../../../images/oscar-favicon.ico" />
+
+    <meta name="viewport" content="width=device-width" />
+
+<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+<script type="text/javascript">
+      google.charts.load('current', {'packages':["corechart","controls"]});
+      google.charts.setOnLoadCallback(drawDashboard);
+      window.onresize = drawDashboard;
+
+      function drawDashboard() {
+          var dashboard = new google.visualization.Dashboard(document.getElementById('dashboard'));
+
+          var chart_types = [{description:"Line Chart - The N-most adopted fcntl opcodes",class:"LineChart",columns:[{type:"number",label:"The N-most adopted fcntl opcodes"},{type:"number",label:"unweighted API importance"},{type:"string",label:"fcntl opcodes",role:"annotation"},{type:"string",label:"description",role:"tooltip",p:{html:true}}],rangedColumn:"The N-most adopted fcntl opcodes",rangedColumnFormat:"#,###",options:{displayAnnotations:true,legend:"none",hAxis:{title:"The N-most adopted fcntl opcodes",titleTextStyle:{fontSize:"24",bold:true},format:"###,###"},vAxis:{title:"unweighted API importance",titleTextStyle:{fontSize:"24",bold:true},format:"###,###%",minValue:0,maxValue:1},tooltip:{isHtml:true}}},{description:"Bar Chart - The N-most adopted fcntl opcodes",class:"ColumnChart",columns:[{type:"number",label:"The N-most adopted fcntl opcodes"},{type:"number",label:"unweighted API importance"},{type:"string",label:"fcntl opcodes",role:"annotation"},{type:"string",label:"description",role:"tooltip",p:{html:true}}],rangedColumn:"The N-most adopted fcntl opcodes",rangedColumnFormat:"#,###",options:{displayAnnotations:true,legend:"none",hAxis:{title:"The N-most adopted fcntl opcodes",titleTextStyle:{fontSize:"24",bold:true},format:"###,###"},vAxis:{title:"unweighted API importance",titleTextStyle:{fontSize:"24",bold:true},format:"###,###%",minValue:0,maxValue:1},bar:{gap:0}}},{description:"Histogram - Distribution of unweighted API importance",class:"Histogram",columns:[{type:"string",label:"fcntl opcodes"},{type:"number",label:"unweighted API importance"}],filteredColumns:[3,1],rangedColumn:"unweighted API importance",rangedColumnFormat:"#,###%",options:{displayAnnotations:true,legend:"none",hAxis:{title:"unweighted API importance",titleTextStyle:{fontSize:"24",bold:true},format:"###,###%",ticks:[0,0.25,0.5,0.75,1]},vAxis:{title:"Number of fcntl opcodess",titleTextStyle:{fontSize:"24",bold:true}},bar:{gap:0},histogram:{bucketSize:0.05,minValue:0,maxValue:1},reverseCategories:true}}];
+          var chart_description = document.getElementById('chart_type_button').innerHTML.replace(/^\s+|\s+$/g, '');
+          var i;
+          var selected;
+
+          for (i = 0; i < chart_types.length; i++) {
+              var type = chart_types[i];
+              if (type['description'] == chart_description) {
+                  selected = type;
+              }
+          }
+
+          var rankRangeSlider = new google.visualization.ControlWrapper({
+              controlType: 'NumberRangeFilter',
+              containerId: 'filter',
+              options: {
+                  filterColumnLabel: selected['rangedColumn'],
+                  ui: {
+                      step: 0.1,
+                      label: selected['rangedColumn'] + ':',
+                      format: { pattern: selected['rangedColumnFormat'] }
+                  }
+              }
+          });
+
+          var chart = new google.visualization.ChartWrapper({
+              chartType: selected['class'],
+              containerId: 'chart',
+              options: selected['options']
+          });
+
+          var savechart = document.getElementById('savechart');
+          google.visualization.events.addListener(chart, 'ready', function () {
+              savechart.innerHTML = '<a href="http://oscar.cs.stonybrook.edu/api-compat-study/linux/study/'&#32;+&#32;chart.getChart().getImageURI()&#32;+&#32;'">Download chart (PNG)</a>';
+          });
+
+          var search = document.getElementById("search-text").value.split(',');
+          var data = new google.visualization.DataTable();
+          for (i = 0; i < selected['columns'].length; i++) {
+              data.addColumn(selected['columns'][i]);
+          }
+          var dataRows = [[1,0.994528,"F_SETFD(0x2)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_SETFD<\/span> <span class=\"api-id\">(0x2)<\/span><br \/> ( rank: <span class=\"api-rank\">1<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">99.45%<\/span> <\/div>"],[2,0.994417,"F_GETFL(0x3)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_GETFL<\/span> <span class=\"api-id\">(0x3)<\/span><br \/> ( rank: <span class=\"api-rank\">2<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">99.44%<\/span> <\/div>"],[3,0.78124,"F_SETFL(0x4)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_SETFL<\/span> <span class=\"api-id\">(0x4)<\/span><br \/> ( rank: <span class=\"api-rank\">3<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">78.12%<\/span> <\/div>"],[4,0.391066,"F_GETFD(0x1)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_GETFD<\/span> <span class=\"api-id\">(0x1)<\/span><br \/> ( rank: <span class=\"api-rank\">4<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">39.11%<\/span> <\/div>"],[5,0.257286,"F_SETLKW(0x7)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_SETLKW<\/span> <span class=\"api-id\">(0x7)<\/span><br \/> ( rank: <span class=\"api-rank\">5<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">25.73%<\/span> <\/div>"],[6,0.246231,"F_GETOWN_EX(0x10)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_GETOWN_EX<\/span> <span class=\"api-id\">(0x10)<\/span><br \/> ( rank: <span class=\"api-rank\">6<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">24.62%<\/span> <\/div>"],[7,0.169849,"F_DUPFD(0x0)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_DUPFD<\/span> <span class=\"api-id\">(0x0)<\/span><br \/> ( rank: <span class=\"api-rank\">7<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">16.98%<\/span> <\/div>"],[8,0.070128,"F_SETLK(0x6)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_SETLK<\/span> <span class=\"api-id\">(0x6)<\/span><br \/> ( rank: <span class=\"api-rank\">8<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">7.01%<\/span> <\/div>"],[9,0.027471,"F_GETLK(0x5)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_GETLK<\/span> <span class=\"api-id\">(0x5)<\/span><br \/> ( rank: <span class=\"api-rank\">9<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">2.75%<\/span> <\/div>"],[10,0.017532,"F_SETSIG(0xa)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_SETSIG<\/span> <span class=\"api-id\">(0xa)<\/span><br \/> ( rank: <span class=\"api-rank\">10<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">1.75%<\/span> <\/div>"],[11,0.012284,"F_SETOWN(0x8)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_SETOWN<\/span> <span class=\"api-id\">(0x8)<\/span><br \/> ( rank: <span class=\"api-rank\">11<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">1.23%<\/span> <\/div>"],[12,0.00134,"F_GETOWN(0x9)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_GETOWN<\/span> <span class=\"api-id\">(0x9)<\/span><br \/> ( rank: <span class=\"api-rank\">12<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.13%<\/span> <\/div>"],[13,0.000335,"F_SETOWN_EX(0xf)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_SETOWN_EX<\/span> <span class=\"api-id\">(0xf)<\/span><br \/> ( rank: <span class=\"api-rank\">13<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.03%<\/span> <\/div>"],[14,0.000112,"F_GETSIG(0xb)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_GETSIG<\/span> <span class=\"api-id\">(0xb)<\/span><br \/> ( rank: <span class=\"api-rank\">14<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.01%<\/span> <\/div>"],[15,0.000112,"F_GETOWNER_UIDS(0x11)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_GETOWNER_UIDS<\/span> <span class=\"api-id\">(0x11)<\/span><br \/> ( rank: <span class=\"api-rank\">15<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.01%<\/span> <\/div>"],[16,0,"F_GETLK64(0xc)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_GETLK64<\/span> <span class=\"api-id\">(0xc)<\/span><br \/> ( rank: <span class=\"api-rank\">16<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.00%<\/span> <\/div>"],[17,0,"F_SETLK64(0xd)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_SETLK64<\/span> <span class=\"api-id\">(0xd)<\/span><br \/> ( rank: <span class=\"api-rank\">17<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.00%<\/span> <\/div>"],[18,0,"F_SETLKW64(0xe)","<div class=\"tooltip\"><span class=\"api-type\">fcntl opcodes:<\/span> <span class=\"api-name\">F_SETLKW64<\/span> <span class=\"api-id\">(0xe)<\/span><br \/> ( rank: <span class=\"api-rank\">18<\/span> )<br \/>unweighted API importance = <span class=\"api-metric\">0.00%<\/span> <\/div>"]];
+          dataRows.forEach(function(element, index, array) {
+              var i;
+
+              for (i = 0; i < search.length; i++) {
+                  if (search[i] && element[2].startsWith(search[i] + '('))
+                      break;
+              }
+              if (i == search.length) {
+                  element[2] = null;
+              }
+
+              if ('filteredColumns' in selected) {
+                  var newelement = new Array(selected['filteredColumns'].length);
+                  for (i = 0; i < selected['filteredColumns'].length; i++) {
+                      newelement[i] = element[selected['filteredColumns'][i]];
+                  }
+                  array[index] = newelement;
+              }
+          });
+          data.addRows(dataRows);
+
+          dashboard.bind(rankRangeSlider, chart);
+          dashboard.draw(data);
+      }
+
+      window.onclick = function(event) {
+          if (!event.target.matches('.dropdown-button')) {
+              var dropdowns = document.getElementsByClassName("dropdown-menu");
+              var i;
+              for (i = 0; i < dropdowns.length; i++) {
+                  var openDropdown = dropdowns[i];
+                  if (openDropdown.classList.contains('show')) {
+                      openDropdown.classList.remove('show');
+                  }
+              }
+          }
+      }
+
+      function toggleDropdown(id) {
+          document.getElementById(id).classList.toggle('show');
+      }
+
+      function selectDropdown(id, text) {
+          document.getElementById(id).innerHTML = text;
+          drawDashboard();
+      }
+
+      function keyDownInput(event) {
+          if (event.keyCode == 13) {
+              drawDashboard();
+          }
+      }
+</script>
+
+</head>
+
+<body>
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-26854735-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+        <div class="blank"></div>
+        <div class="server-title">API Compatibility Database (Beta)</div>
+        <div class="menuwrap"><div class="menu">
+        <div class="menu-button">
+            <script type="text/javascript">
+            function togglemenu() {
+                var menu = document.getElementsByClassName("menu");
+                if (menu) {
+                    menu[0].classList.toggle("show-dropdown");
+                }
+            }
+            </script>
+            <img onclick="togglemenu()" style="height: 100%" src="../../images/menu-button.png"></div>
+            <ul>
+<li><a href="../../index.html">Home</a></li><li><a>Methodology</a><ul><li><a href="../../method/concepts.html">Basic concepts</a></li><li><a href="../../method/api-importance.html">Metric: API importance</a></li><li><a href="../../method/weighted-completeness.html">Metric: weighted completeness</a></li><li><a href="../../method/unweighted-api-importance.html">Metric: unweighted API importance</a></li><li><a href="../../method/analysis.html">Application anlaysis</a></li><li><a href="../../method/limitations.html">Limitations</a></li></ul></li><li class="nosub"><a>Linux <img src="../../images/linux-logo.png"></a></li><li><a>Evaluation</a><ul><li><a href="../eval/os.html">OS / emulation layers</a></li><li><a href="../eval/libc.html">Libc variants</a></li></ul></li><li><a>Scope</a><ul><li><a href="../scope/package-popularity.html">Package popularity</a></li><li><a href="../scope/package-types.html">Package types</a></li><li><a href="../scope/executable-types.html">Executable types</a></li></ul></li><li><a>Study (on users)</a><ul><li><a href="syscalls.html">System calls</a></li><li><a href="fcntl-opcodes.html">Vectored system calls: fcntl</a></li><li><a href="ioctl-opcodes.html">Vectored system calls: ioctl</a></li><li><a href="prctl-opcodes.html">Vectored system calls: prctl</a></li><li><a href="pseudo-files.html">Pseudo-files and system files</a></li><li><a href="gnu-libc-functions.html">Library functions: GNU libc</a></li></ul></li><li><a>Study (on applications)</a><ul><li><a href="syscalls-unweighted.html">System calls</a></li><li><a href="fcntl-opcodes-unweighted.html">Vectored system calls: fcntl</a></li><li><a href="ioctl-opcodes-unweighted.html">Vectored system calls: ioctl</a></li><li><a href="prctl-opcodes-unweighted.html">Vectored system calls: prctl</a></li><li><a href="pseudo-files-unweighted.html">Pseudo-files and system files</a></li><li><a href="gnu-libc-functions-unweighted.html">Library functions: GNU libc</a></li></ul></li><li><a>Database</a><ul><li><a href="../query.html">Online query (beta)</a></li><li><a href="../download.html">Download raw database</a></li></ul></li><div class="menu-sep"></div><li><a>Framework</a><ul><li><a href="../../framework/api-analysis.html">GitHub</a></li></ul></li>            </ul>
+        </div></div>
+        <div class="main">
+                            <div class="wrapper top">
+                    <h1 class="page-title">Linux > Study (on Application Developers) > Opcodes for fcntl System Call</h1>
+                </div>
+            
+<div class="wrapper">
+    <div class="chart-wrapper"><div id="chart"></div></div>
+    <div class="blank"></div>
+</div>
+
+<div class="wrapper">
+    <div class="chart-dashboard" id="dashboard">
+        <div class="control dropdown">
+            Chart type:
+            <button onclick="toggleDropdown('chart_type')" id="chart_type_button" class="dropdown-button">
+                Line Chart - The N-most adopted fcntl opcodes            </button>
+            <div id="chart_type" class="dropdown-menu">
+                                    <a href="fcntl-opcodes-unweighted.html#" onclick="selectDropdown('chart_type_button', 'Line Chart - The N-most adopted fcntl opcodes')">Line Chart - The N-most adopted fcntl opcodes</a>
+                                    <a href="fcntl-opcodes-unweighted.html#" onclick="selectDropdown('chart_type_button', 'Bar Chart - The N-most adopted fcntl opcodes')">Bar Chart - The N-most adopted fcntl opcodes</a>
+                                    <a href="fcntl-opcodes-unweighted.html#" onclick="selectDropdown('chart_type_button', 'Histogram - Distribution of unweighted API importance')">Histogram - Distribution of unweighted API importance</a>
+                            </div>
+        </div>
+
+        <div class="control" id="filter"></div>
+
+        <div class="control" id="search">
+        Search fcntl opcodess (use comma to separate):
+             <input onkeydown="keyDownInput(event)" type="text" id="search-text" class="input-box">
+        </div>
+
+        <div class="blank">
+        <div class="control" id="savechart"></div>
+        <div class="control" id="savecsv"><a href="../../data/linux-fcntl-opcodes-unweighted-api-importance.csv">Download data (CSV)</a></div>
+    </div>
+
+    <div class="blank"></div>
+</div>
+
+        </div>
+    </div>
+</body>
+</html>
+
