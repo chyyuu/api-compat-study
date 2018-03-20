@@ -53,7 +53,7 @@
 
           var savechart = document.getElementById('savechart');
           google.visualization.events.addListener(chart, 'ready', function () {
-              savechart.innerHTML = '<a href="http://oscar.cs.stonybrook.edu/api-compat-study/linux/study/'&#32;+&#32;chart.getChart().getImageURI()&#32;+&#32;'">Download chart (PNG)</a>';
+              savechart.innerHTML = '<a href="' + chart.getChart().getImageURI() + '">Download chart (PNG)</a>';
           });
 
           var search = document.getElementById("search-text").value.split(',');
